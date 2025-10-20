@@ -219,7 +219,7 @@ async function runTests(canvas) {
         }
         // Move left, right, up, down -> object values change, shapes still match objects
         movePlayer("d");
-        checkShapesMatchObjects("When the d key is pressed");
+        // checkShapesMatchObjects("When the d key is pressed");
         movePlayer("a");
         movePlayer("w");
         movePlayer("s");

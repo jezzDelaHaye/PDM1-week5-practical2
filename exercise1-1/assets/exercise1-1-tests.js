@@ -71,6 +71,21 @@ async function runTests(canvas) {
             } else {
                 TestResults.addFail("Pressing the space bar does not appear to generate new rectangles.");
             }
+            // Pressing another key
+            if (hasKeyPressed) {
+                simulateKeyboardEvent(keyPressed, "a");
+            }
+            if (hasKeyReleased) {
+                simulateKeyboardEvent(keyReleased, "a");
+            }
+            advanceToFrame(frameCount + 1);
+            const thirdShapes = getShapes();
+            if (testShapesMatchInOrder(secondShapes, thirdShapes)) {
+                TestResults.addPass("Pressing a key other than the space bar does not change the rectangles.");
+            } else {
+                TestResults.addFail(`Pressing the "a" key changes the rectangles. The shapes drawn on the canvas should only change if the space bar is pressed.`);
+            }
+            
         } else {
             TestResults.addFail(`Expected 100 rectangles after the space bar is pressed. Found ${secondShapes.length} shapes, of which ${rectCount2} are rectangles.`);
         } 
