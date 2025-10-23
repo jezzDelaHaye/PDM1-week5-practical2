@@ -23,23 +23,27 @@ function draw()
         rect(squares[i].x,squares[i].y,squares[i].h,squares[i].w)
     }
 }
-function mouseClicked()
+
+function keyPressed()
 {
-    c1 = (random(255))
-    c2 = (random(255))
-    c3 = (random(255))
-    squares.length = (0);
-    for(let i =0; i < 100; i++)
+    if (key === ' ')
     {
-        squares.shift;
-        let rectangle = 
+        c1 = (random(255))
+        c2 = (random(255))
+        c3 = (random(255))
+        squares.length = (0);
+        for(let i =0; i < 100; i++)
         {
-           x:random(600),
-           y:random(600),
-           h:random(5,15),            
-           w:random(5,15)
+            squares.shift;
+            let rectangle = 
+            {
+              x:random(600),
+              y:random(600),
+              h:random(5,15),            
+              w:random(5,15)
+            }
+            squares.push(rectangle);
+            console.log(squares);
         }
-        squares.push(rectangle);
-        console.log(squares);
     }
 }
