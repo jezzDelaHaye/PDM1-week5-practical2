@@ -16,11 +16,6 @@ function draw()
     move();
     rectMode(CENTER);
     square(player.x,player.y,player.size);      
-    console.log(player.x)
-    console.log(player.y)
-
-    
-
 }
 let player = 
 {
@@ -50,34 +45,48 @@ function keyReleased()
     if (key === 'a'){movingLeft = false;}
     if (key === 'd'){movingRight = false;}
 }
-function move()
-{
-    if (movingUpwards) 
-    {
-        if (!(player.y - player.speed) === (player.y >= 75 && player.y <= 275)) 
+function move() {
+    // Up
+    if (movingUpwards && player.y - player.size/2 > 0) {
+        if (!(player.x + player.size/2 > obstacle.x &&
+              player.x - player.size/2 < obstacle.x + obstacle.width &&
+              player.y - player.size/2 - player.speed < obstacle.y + obstacle.height &&
+              player.y + player.size/2 > obstacle.y))
         {
-            if (!(player.x) === (player.x >= 125 && player.x <= 375))
-            {
-                player.y -= player.speed
-            }
-            
+            player.y -= player.speed;
         }
     }
-    if (movingDownwards) 
-    {
-        if (!(player.y + player.speed) === (player.y >= 75 && player.y <= 275))
+
+    // Down
+    if (movingDownwards && player.y + player.size/2 < height) {
+        if (!(player.x + player.size/2 > obstacle.x &&
+              player.x - player.size/2 < obstacle.x + obstacle.width &&
+              player.y + player.size/2 + player.speed > obstacle.y &&
+              player.y - player.size/2 < obstacle.y + obstacle.height))
         {
-            if (!(player.x) === (player.x >= 125 && player.x <= 375))
-            {
-                player.y += player.speed
-            }       
+            player.y += player.speed;
         }
     }
-    if (movingLeft) {player.x -= player.speed}
-    if (movingRight) {player.x += player.speed}
-    /*if (player.x >= 0 && player.x <= 150)
-    if (player.x >= 250 && player.x <= 400)
-    if (player.y >= 0 && player.y <= 100)
-    if (player.y >= 300 && player.y <= 400)
-    */
+
+    // Left
+    if (movingLeft && player.x - player.size/2 > 0) {
+        if (!(player.y + player.size/2 > obstacle.y &&
+              player.y - player.size/2 < obstacle.y + obstacle.height &&
+              player.x - player.size/2 - player.speed < obstacle.x + obstacle.width &&
+              player.x + player.size/2 > obstacle.x))
+        {
+            player.x -= player.speed;
+        }
+    }
+
+    // Right
+    if (movingRight && player.x + player.size/2 < width) {
+        if (!(player.y + player.size/2 > obstacle.y &&
+              player.y - player.size/2 < obstacle.y + obstacle.height &&
+              player.x + player.size/2 + player.speed > obstacle.x &&
+              player.x - player.size/2 < obstacle.x + obstacle.width))
+        {
+            player.x += player.speed;
+        }
+    }
 }
